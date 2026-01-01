@@ -1,9 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class Main {
@@ -14,19 +11,19 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
 
-        Set<String> set = new HashSet<>();
+        String[] input = new String[n];
 
         for (int i = 0; i < n; i++) {
-            String nextLine = br.readLine();
-            set.add(nextLine);
+            input[i] = br.readLine();
         }
 
-        List<String> list = new ArrayList<>(set);
-        
-        list.sort(Main::compare);
+        Arrays.sort(input, Main::compare);
 
-        for(String s : list)
-            sb.append(s).append("\n");
+        sb.append(input[0]).append("\n");
+        for (int i = 1; i < n; i++) {
+            if(!input[i].equals(input[i-1]))
+                sb.append(input[i]).append("\n");
+        }
 
         System.out.println(sb);
 
