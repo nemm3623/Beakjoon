@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -15,14 +14,11 @@ public class Main {
 
             String[] tokens = input.split(" ");
 
-            List<Double> list = new ArrayList<>();
+            int a = Integer.parseInt(tokens[0]);
+            int b = Integer.parseInt(tokens[1]);
+            int c = Integer.parseInt(tokens[2]);
 
-            for (String token : tokens)
-                list.add(Double.parseDouble(token));
-
-            list.sort(Double::compareTo);
-
-            if(Math.pow(list.get(2),2) == (Math.pow(list.get(0),2) + Math.pow(list.get(1),2)))
+            if((a*a == (b*b + c*c)) || (b*b == (a*a + c*c)) || (c*c == (a*a + b*b)))
                 System.out.println("right");
             else
                 System.out.println("wrong");
