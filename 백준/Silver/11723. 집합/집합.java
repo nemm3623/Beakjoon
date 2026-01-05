@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Main {
 
-    static int[] S = new int[21];
+    static boolean[] S = new boolean[21];
     static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
@@ -15,7 +15,7 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
 
-        sb = new StringBuilder(n);
+        sb = new StringBuilder(n * 2);
 
 //        List<Integer> S = new ArrayList<>(n);
 
@@ -55,38 +55,38 @@ public class Main {
     }
 
     static void add(int a){
-        if(S[a] == 0)
-            S[a] = a;
+        if(!S[a])
+            S[a] = true;
     }
 
     static void remove(int a){
-        if(S[a] != 0)
-            S[a] = 0;
+        if(S[a])
+            S[a] = false;
     }
 
     static void check(int a){
-        if(S[a] == a)
+        if(S[a])
             sb.append("1").append('\n');
         else
             sb.append("0").append('\n');
     }
 
     static void toggle(int a){
-        if(S[a] == 0)
-            S[a] = a;
+        if(!S[a])
+            S[a] = true;
         else
-            S[a] = 0;
+            S[a] = false;
     }
 
     static void all(){
         for (int i = 1; i < S.length; i++) {
-            S[i] = i;
+            S[i] = true;
         }
     }
 
     static void empty(){
         for (int i = 1; i < S.length; i++) {
-            S[i] = 0;
+            S[i] = false;
         }
     }
 }
