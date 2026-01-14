@@ -6,13 +6,6 @@ import java.util.*;
 
 public class Main {
 
-    static int[] arrX = {1,-1,0,0};
-    static int[] arrY = {0,0,1,-1};
-    static int[][] arr;
-    static int[][] res;
-
-    static boolean[][] visited;
-
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,7 +24,7 @@ public class Main {
             meetings.add(new Meeting(start, end));
         }
 
-        meetings.sort(Comparator.comparingInt(Meeting::getEnd).thenComparingInt(Meeting::getStart).thenComparingInt(Meeting::getValue));
+        meetings.sort(Comparator.comparingInt(Meeting::getEnd).thenComparingInt(Meeting::getStart));
 
         System.out.println(func(meetings));
     }
@@ -49,7 +42,7 @@ public class Main {
 
             currentStart = start;
             currentEnd = m.getEnd();
-            
+
             res.add(new Meeting(currentStart, currentEnd));
         }
         return res.size();
@@ -59,16 +52,13 @@ public class Main {
 
         int start;
         int end;
-        int value;
 
         public Meeting(int start, int end) {
             this.start = start;
             this.end = end;
-            this.value = end - start;
         }
         public int getStart(){ return start; }
         public int getEnd(){ return end;}
-        public int getValue(){ return value;}
     }
 
 }
