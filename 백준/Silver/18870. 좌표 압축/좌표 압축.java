@@ -1,8 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
-import java.util.stream.Collectors;   // ★ 추가
+import java.util.HashMap;
+import java.util.StringTokenizer;
+import java.util.Arrays;
 
 public class Main {
 
@@ -14,31 +15,29 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        List<Integer> list = new ArrayList<>();
+        int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-            list.add(Integer.parseInt(st.nextToken()));
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        List<Integer> sorted = list.stream()
-                .sorted()
-                .collect(Collectors.toList());  
+        int[] sorted = arr.clone();
+        Arrays.sort(sorted);
 
-        Map<Integer, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
 
-        for (int i = 0; i < sorted.size(); i++) {
-            if (map.size() != i) map.putIfAbsent(sorted.get(i), map.size());
-            else map.putIfAbsent(sorted.get(i), i);
+        int idx = 0;
+        for (int x : sorted) {
+            if (!map.containsKey(x)) {
+                map.put(x, idx++);
+            }
         }
-
-        List<Integer> result = list.stream()
-                .map(map::get)
-                .collect(Collectors.toList());
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            sb.append(result.get(i)).append(" ");
+            sb.append(map.get(arr[i])).append(' ');
         }
+
         System.out.println(sb);
     }
 }
