@@ -23,26 +23,24 @@ public class Main {
 
         int[][] map = new int[n + 1][n + 1];
 
-        int sum = 0;
         for (int i = 1; i <= n; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j = 1; j <= n; j++) {
-                map[i][j] = map[i][j-1] + Integer.parseInt(st.nextToken());
+                int num = Integer.parseInt(st.nextToken());
+                map[i][j] = map[i][j - 1] + map[i - 1][j] - map[i - 1][j - 1] + num;
             }
         }
 
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= m; i++) {
             st = new StringTokenizer(br.readLine());
-            int aX = Integer.parseInt(st.nextToken());
-            int aY = Integer.parseInt(st.nextToken());
-            int bX = Integer.parseInt(st.nextToken());
-            int bY = Integer.parseInt(st.nextToken());
+            int ax = Integer.parseInt(st.nextToken());
+            int ay = Integer.parseInt(st.nextToken());
+            int bx = Integer.parseInt(st.nextToken());
+            int by = Integer.parseInt(st.nextToken());
 
-            int res = 0;
-            for(int j = aX; j <= bX; j++){
-                res += map[j][bY] - map[j][aY - 1];
-            }
+            int res = map[bx][by] - map[bx][ay - 1] // 안 쓰는 세로 줄 쳐내기
+                    - map[ax - 1][by] + map[ax - 1][ay - 1]; // 안쓰는 가로 줄 쳐내고 채우기
 
             sb.append(res).append("\n");
         }
