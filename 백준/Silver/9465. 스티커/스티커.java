@@ -40,21 +40,26 @@ public class Main {
 
         if( n == 1){
             sb.append(Math.max(stickers[0][0],stickers[1][0])).append("\n");
+            return;
         }
-        else {
-            int[][] res = new int[2][n];
-            res[0][0] = stickers[0][0];
-            res[1][0] = stickers[1][0];
-            res[0][1] = stickers[0][1] + res[1][0];
-            res[1][1] = stickers[1][1] + res[0][0];
+
+        int up0 = stickers[0][0];
+        int down0 = stickers[1][0];
+        int up1 = stickers[0][1] + down0;
+        int down1 = stickers[1][1] + up0;
 
 
-            for (int i = 2; i < n; i++) {
-                res[0][i] = stickers[0][i] + Math.max(res[1][i - 2], res[1][i - 1]);
-                res[1][i] = stickers[1][i] + Math.max(res[0][i - 2], res[0][i - 1]);
-            }
+        for (int i = 2; i < n; i++) {
+            int newUp = stickers[0][i] + Math.max(down0, down1);
+            int newDown = stickers[1][i] + Math.max(up0, up1);
 
-            sb.append(Math.max(res[0][n - 1], res[1][n - 1])).append("\n");
+            up0 = up1;
+            up1 = newUp;
+            down0 = down1;
+            down1 = newDown;
         }
+
+        sb.append(Math.max(up1,down1)).append("\n");
+
     }
 }
